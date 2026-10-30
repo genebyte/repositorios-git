@@ -7,7 +7,7 @@ Vanilla HTML + p5.js + ml5.js sketch, split across three independently owned fea
 - Serve the folder over HTTP; `file://` blocks camera access and `ml5.handPose` will fail:
   `python -m http.server 8000` (or `npx serve .`), then open `http://localhost:8000`.
 - Both CDN pins must stay reachable: p5 `2.3.3` (jsDelivr) and ml5 `1.4.0` (unpkg). ml5 also fetches TF.js model weights at runtime, so first load needs network.
-- `ml5` must load after `p5`, and every feature file must load before `sketcj.js`.
+- `ml5` must load after `p5`, and every feature file must load before `sketch.js`.
 
 ## Feature contract (the seam between the three owners)
 
@@ -18,7 +18,7 @@ Each feature is one file exposing `init(canvas)`, `update()`, `draw()`, `getStat
 - `draw()` — per-frame rendering of that feature's own visuals only.
 - `getState()` — plain data for other features; never p5 objects.
 
-`sketcj.js` is the composition root: canvas creation plus an `update()`/`draw()` loop over `FEATURES`. It is the only shared file, so keep it to wiring — adding a feature is one entry in `FEATURES`, nothing else.
+`sketch.js` is the composition root: canvas creation plus an `update()`/`draw()` loop over `FEATURES`. It is the only shared file, so keep it to wiring — adding a feature is one entry in `FEATURES`, nothing else.
 
 Ownership: `js/handpose.js` owns webcam + model + hand rendering; `js/gamelogic.js` owns rules and **interprets** gestures; `js/ui.js` owns chrome/HUD. Handpose publishes landmarks only — do not move gesture classification into `handpose.js`.
 

@@ -1,7 +1,7 @@
 /**
  * HandPoseFeature — hand detection and skeleton rendering.
  *
- * Shared feature contract (every feature in sketcj.js implements the same shape):
+ * Shared feature contract (every feature in sketch.js implements the same shape):
  *   init(canvas) -> Promise<void>  one-time async setup, receives { width, height }
  *   update()     -> void           per-frame state refresh, no drawing
  *   draw()       -> void           per-frame rendering, only this feature's visuals
