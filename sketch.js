@@ -17,7 +17,7 @@ const FEATURES = [HandPoseFeature];
 const activeFeatures = [];
 
 async function setup() {
-  createCanvas(640, 480);
+  createCanvas(windowWidth, windowHeight);
   for (const feature of FEATURES) {
     await feature.init({ width, height });
     activeFeatures.push(feature);

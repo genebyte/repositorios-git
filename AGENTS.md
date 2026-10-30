@@ -25,6 +25,7 @@ Ownership: `js/handpose.js` owns webcam + model + hand rendering; `js/gamelogic.
 ## Coordinates and camera
 
 - `getState().hands[]` is in canvas screen space, already mirrored (`x = width - x`). Consumers never un-mirror.
+- The canvas is full-window (`createCanvas(windowWidth, windowHeight)`), so never hardcode 640x480 when placing things; read the canvas size instead.
 - Each hand: `landmarks[21]` (MediaPipe order: 0 wrist, 4/8/12/16/20 fingertips), `points[name]`, `palm`, `bounds`, `handedness`.
 - Never draw the camera frame. `createCapture` injects a `<video>` element, so `video.hide()` is mandatory — without it the camera appears on screen even if `image(video, ...)` is never called.
 - Skeleton topology is by landmark index (`BONES` in `js/handpose.js`); smoothing resets when the hand count changes because detection order is not stable across frames.
